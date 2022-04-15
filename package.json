@@ -4,22 +4,40 @@
 	"description": "A custom terminal that does not use vscode pseudo-terminal API",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.66.0"
+		"vscode": "^1.50.0"
 	},
 	"categories": [
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:custom-terminal.helloWorld"
+		"onStartupFinished"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
-		"commands": [
+		"keybindings":[
 			{
-				"command": "custom-terminal.helloWorld",
-				"title": "Hello World"
+				"command": "workbench.view.extension.customTerminal",
+				"key": "cmd+ctrl+`"
 			}
-		]
+		],
+		"viewsContainers": {
+			"panel": [
+				{
+					"id": "customTerminal",
+					"title": "Custom Terminal",
+					"icon": "media/tym.svg"
+				}
+			]
+		},
+		"views": {
+			"customTerminal": [
+				{
+					"type": "webview",
+					"id": "customTerminal.canvasTerminal",
+					"name": "Custom Terminal"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run package",
